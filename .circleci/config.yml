@@ -13,6 +13,7 @@ jobs:
           command: |
             sudo composer self-update
             composer install -n --prefer-dist
+            apt-get install curl
       - run:
           name: Setup Code Climate test-reporter
           command: |
