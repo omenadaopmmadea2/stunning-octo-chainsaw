@@ -7,7 +7,7 @@ working_dir: &working_dir ~/app
     - run: chmod +x ./cc-test-reporter
     - run: ./cc-test-reporter before-build
     - run: gem install bundler:2.1.4
-    - run: bundle install --jobs=4 --retry=4 --path vendor/bundle
+    - run: bundle install --jobs=4 --retry=4 --path=${BUNDLE_PATH:-vendor/bundle}
     - run: bundle exec rake rubocop
     - run:
         name: Run tests
