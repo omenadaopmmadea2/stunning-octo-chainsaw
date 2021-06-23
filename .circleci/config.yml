@@ -57,6 +57,30 @@ jobs:
     <<: *build_definition
     docker:
       - image: ruby:2.0
+  build_ruby2_8:
+    <<: *build_definition
+    docker:
+      - image: ruby:2.0
+  build_ruby2_9:
+    <<: *build_definition
+    docker:
+      - image: ruby:2.0
+  build_ruby2_10:
+    <<: *build_definition
+    docker:
+      - image: ruby:2.0
+  build_ruby2_11:
+    <<: *build_definition
+    docker:
+      - image: ruby:2.0
+  build_ruby2_12:
+    <<: *build_definition
+    docker:
+      - image: ruby:2.0
+  build_ruby2_13:
+    <<: *build_definition
+    docker:
+      - image: ruby:2.0
 
 workflows:
   version: 2
@@ -71,3 +95,10 @@ workflows:
       - build_ruby2_2
       - build_ruby2_1
       - build_ruby2_0
+      - build_ruby2_8
+      - build_ruby2_9
+      - build_ruby2_10
+      - build_ruby2_11
+      - build_ruby2_12
+      - build_ruby2_13
+      
