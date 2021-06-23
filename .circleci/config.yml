@@ -78,9 +78,28 @@ jobs:
     docker:
       - image: ruby:2.0
   build_ruby2_13:
-    <<: *build_definition
-    docker:
-      - image: ruby:2.0
+    machine:
+      image: ubuntu-2004:202010-01
+    
+    steps:
+      - checkout
+      - run: git --version
+      - run: 
+          name: Check
+          when: always
+          command: ssh git@github.com || true
+      - run: git pull
+      - run: cat README.md
+      - run: echo "- $(date)" >> README.md
+      - run: cat README.md
+      - run: |
+          echo $FOO
+      - run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
+      - run: |
+          git commit -am '[circle skip] update from Circle CI!'
+          git push
 
 workflows:
   version: 2
@@ -99,6 +118,21 @@ workflows:
       - build_ruby2_9
       - build_ruby2_10
       - build_ruby2_11
-      - build_ruby2_12
-      - build_ruby2_13
-      
+      - build_ruby2_12 
+      - build_ruby2_13:
+          requires:
+            - build
+            - build_ruby2_7
+            - build_ruby2_6
+            - build_ruby2_5
+            - build_ruby2_4
+            - build_ruby2_3
+            - build_ruby2_2
+            - build_ruby2_1
+            - build_ruby2_0
+            - build_ruby2_8
+            - build_ruby2_9
+            - build_ruby2_10
+            - build_ruby2_11
+            - build_ruby2_12
+
